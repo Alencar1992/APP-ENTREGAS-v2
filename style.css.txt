@@ -31,7 +31,7 @@ input, select {
   border-radius: 8px;
   border: none;
   background: #0f172a;
-  color: #f8fafc;
+  color: #040491;
 }
 
 button {
@@ -70,3 +70,4 @@ hr {
   overflow-y: auto;
   font-size: 14px;
 }
+
