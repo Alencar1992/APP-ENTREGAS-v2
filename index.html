@@ -4,35 +4,36 @@
   <meta charset="UTF-8">
   <title>ALENCAR FRETES</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="card">
-  <h1>🏍️ ALENCAR FRETES 2.1</h1>
+  <h1>🏍️ ALENCAR FRETES</h1>
 
   <input type="number" id="km" placeholder="Distância em KM">
-
-  <select id="cliente"></select>
 
   <button onclick="calcular()">Calcular Frete</button>
 
   <p id="resultado"></p>
   <p id="aviso"></p>
 
-  <button onclick="whatsapp()">📲 Enviar WhatsApp</button>
+  <select id="cliente">
+    <option value="">Selecione a cliente</option>
+  </select>
+
+  <button onclick="enviarWhatsApp()">📲 Enviar WhatsApp</button>
 
   <hr>
 
-  <h3>➕ Adicionar Cliente</h3>
+  <h3>➕Novo Cliente</h3>
   <input type="text" id="nomeCliente" placeholder="Nome da cliente">
   <input type="text" id="numeroCliente" placeholder="DDD + número">
   <button onclick="adicionarCliente()">Salvar Cliente</button>
 
   <hr>
 
-  <h3>📜 Histórico</h3>
+  <h3>📜Histórico</h3>
   <div id="historico"></div>
 </div>
 
