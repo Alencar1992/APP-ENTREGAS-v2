@@ -7,35 +7,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="card">
+    <h1>🏍️ ALENCAR FRETES</h1>
+    <p class="subtitle">Consulta de endereço e cálculo de frete para entregas.</p>
 
-<div class="card">
-  <h1>🏍️ ALENCAR FRETES</h1>
+    <section>
+      <h2>📍 Consulta por CEP</h2>
+      <div class="row gap">
+        <input type="text" id="cep" maxlength="9" placeholder="CEP (00000-000)">
+        <button type="button" class="btn-secondary" id="btnConsultarCep">Consultar</button>
+      </div>
+      <div class="grid-2">
+        <input type="text" id="logradouro" placeholder="Logradouro" readonly>
+        <input type="text" id="bairro" placeholder="Bairro" readonly>
+        <input type="text" id="cidade" placeholder="Cidade" readonly>
+        <input type="text" id="estado" placeholder="UF" readonly>
+      </div>
+    </section>
 
-  <input type="number" id="km" placeholder="Distância em KM">
-  <button onclick="calcular()">Calcular Frete</button>
+    <section>
+      <h2>💰 Cálculo de Frete</h2>
+      <div class="grid-2">
+        <input type="number" id="km" placeholder="Distância em KM" min="0" step="0.1">
+        <input type="number" id="peso" placeholder="Peso (kg)" min="0" step="0.1">
+      </div>
+      <button type="button" id="btnCalcular">Calcular Frete</button>
+      <p id="resultado"></p>
+      <p id="aviso"></p>
+    </section>
 
-  <p id="resultado"></p>
-  <p id="aviso"></p>
+    <section>
+      <h2>👤 Cliente e envio</h2>
+      <select id="cliente">
+        <option value="">Selecione o cliente</option>
+      </select>
+      <button type="button" id="btnEnviar">📲 Enviar WhatsApp</button>
+    </section>
 
-  <select id="cliente">
-    <option value="">Selecione a cliente</option>
-  </select>
+    <hr>
 
-  <button onclick="enviarWhatsApp()">📲 Enviar WhatsApp</button>
+    <section>
+      <h3>➕ Novo Cliente</h3>
+      <input type="text" id="nomeCliente" placeholder="Nome do cliente">
+      <input type="text" id="numeroCliente" placeholder="DDD + número">
+      <button type="button" id="btnSalvarCliente" class="btn-secondary">Salvar Cliente</button>
+    </section>
 
-  <hr>
+    <hr>
 
-  <h3>➕ Novo Cliente</h3>
-  <input type="text" id="nomeCliente" placeholder="Nome da cliente">
-  <input type="text" id="numeroCliente" placeholder="DDD + número">
-  <button onclick="adicionarCliente()">Salvar Cliente</button>
+    <section>
+      <h3>📜 Histórico</h3>
+      <div id="historico"></div>
+    </section>
+  </main>
 
-  <hr>
-
-  <h3>📜 Histórico</h3>
-  <div id="historico"></div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
