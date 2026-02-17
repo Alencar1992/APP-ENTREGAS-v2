@@ -23,6 +23,15 @@
         <input type="text" id="cidade" placeholder="Cidade" readonly>
         <input type="text" id="estado" placeholder="UF" readonly>
       </div>
+      <button type="button" id="btnMapaCep" class="btn-maps">🗺️ Ver endereço no Google Maps</button>
+    </section>
+
+    <section>
+      <h2>🧭 Rota de entrega (Google Maps)</h2>
+      <input type="text" id="origem" placeholder="Origem (ex: Rua A, 123 - Cidade)">
+      <input type="text" id="destino" placeholder="Destino (preenchido pelo CEP ou manual)">
+      <button type="button" id="btnAbrirRota" class="btn-maps">🚗 Abrir rota no Google Maps</button>
+      <p class="helper">Dica: após abrir a rota, copie a distância do Maps e use no campo KM abaixo.</p>
     </section>
 
     <section>

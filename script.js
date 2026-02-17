@@ -23,6 +23,8 @@ const elements = {
   bairro: document.getElementById("bairro"),
   cidade: document.getElementById("cidade"),
   estado: document.getElementById("estado"),
+  origem: document.getElementById("origem"),
+  destino: document.getElementById("destino"),
   km: document.getElementById("km"),
   peso: document.getElementById("peso"),
   resultado: document.getElementById("resultado"),
@@ -32,6 +34,8 @@ const elements = {
   nomeCliente: document.getElementById("nomeCliente"),
   numeroCliente: document.getElementById("numeroCliente"),
   btnConsultarCep: document.getElementById("btnConsultarCep"),
+  btnMapaCep: document.getElementById("btnMapaCep"),
+  btnAbrirRota: document.getElementById("btnAbrirRota"),
   btnCalcular: document.getElementById("btnCalcular"),
   btnEnviar: document.getElementById("btnEnviar"),
   btnSalvarCliente: document.getElementById("btnSalvarCliente"),
@@ -44,6 +48,42 @@ function formatCep(value) {
 
 function formatAddress(data) {
   return `${data.logradouro || ""}, ${data.bairro || ""} - ${data.localidade || ""}/${data.uf || ""}`.replace(/^,\s*/, "");
+}
+
+function openGoogleMapsSearch(address) {
+  const query = (address || "").trim();
+
+  if (!query) {
+    alert("Informe um endereço para pesquisar no Google Maps.");
+    return;
+  }
+
+  const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  window.open(url, "_blank");
+}
+
+function openGoogleMapsRoute(origin, destination) {
+  const origem = (origin || "").trim();
+  const destino = (destination || "").trim();
+
+  if (!origem || !destino) {
+    alert("Informe origem e destino para abrir a rota no Google Maps.");
+    return;
+  }
+
+  const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origem)}&destination=${encodeURIComponent(destino)}&travelmode=driving`;
+  window.open(url, "_blank");
+}
+
+function getResolvedAddress() {
+  const enderecoViaCep = formatAddress({
+    logradouro: elements.logradouro.value,
+    bairro: elements.bairro.value,
+    localidade: elements.cidade.value,
+    uf: elements.estado.value,
+  }).trim();
+
+  return elements.destino.value.trim() || enderecoViaCep;
 }
 
 async function consultarCep() {
@@ -70,6 +110,11 @@ async function consultarCep() {
     elements.bairro.value = data.bairro || "";
     elements.cidade.value = data.localidade || "";
     elements.estado.value = data.uf || "";
+
+    const enderecoCompleto = formatAddress(data);
+    if (enderecoCompleto) {
+      elements.destino.value = enderecoCompleto;
+    }
   } catch (error) {
     alert("Falha ao consultar CEP. Verifique sua conexão.");
   } finally {
@@ -109,12 +154,7 @@ function calcularFrete() {
     km,
     peso,
     valor: valorFinal,
-    endereco: formatAddress({
-      logradouro: elements.logradouro.value,
-      bairro: elements.bairro.value,
-      localidade: elements.cidade.value,
-      uf: elements.estado.value,
-    }),
+    endereco: getResolvedAddress(),
     data: new Date().toLocaleString("pt-BR"),
   };
 
@@ -196,6 +236,15 @@ function bindEvents() {
   });
 
   elements.btnConsultarCep.addEventListener("click", consultarCep);
+  elements.btnMapaCep.addEventListener("click", () => {
+    const address = getResolvedAddress() || elements.cep.value;
+    openGoogleMapsSearch(address);
+  });
+
+  elements.btnAbrirRota.addEventListener("click", () => {
+    openGoogleMapsRoute(elements.origem.value, getResolvedAddress());
+  });
+
   elements.btnCalcular.addEventListener("click", calcularFrete);
   elements.btnEnviar.addEventListener("click", enviarWhatsApp);
   elements.btnSalvarCliente.addEventListener("click", adicionarCliente);
