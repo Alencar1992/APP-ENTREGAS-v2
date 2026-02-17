@@ -9,64 +9,47 @@
 <body>
   <main class="card">
     <h1>🏍️ ALENCAR FRETES</h1>
-    <p class="subtitle">Consulta de endereço e cálculo de frete para entregas.</p>
+    <p class="subtitle">Origem fixa: Av. João Dias, 2074</p>
 
     <section>
-      <h2>📍 Consulta por CEP</h2>
-      <div class="row gap">
-        <input type="text" id="cep" maxlength="9" placeholder="CEP (00000-000)">
-        <button type="button" class="btn-secondary" id="btnConsultarCep">Consultar</button>
+      <h2>🔎 Pesquisa de destino</h2>
+      <div class="mode-switch" role="group" aria-label="Tipo de pesquisa">
+        <button type="button" id="btnModoCep" class="btn-toggle active">Pesquisar por CEP</button>
+        <button type="button" id="btnModoEndereco" class="btn-toggle">Pesquisar por Endereço</button>
       </div>
-      <div class="grid-2">
-        <input type="text" id="logradouro" placeholder="Logradouro" readonly>
-        <input type="text" id="bairro" placeholder="Bairro" readonly>
-        <input type="text" id="cidade" placeholder="Cidade" readonly>
-        <input type="text" id="estado" placeholder="UF" readonly>
-      </div>
-      <button type="button" id="btnMapaCep" class="btn-maps">🗺️ Ver endereço no Google Maps</button>
-    </section>
 
-    <section>
-      <h2>🧭 Rota de entrega (Google Maps)</h2>
-      <input type="text" id="origem" placeholder="Origem (ex: Rua A, 123 - Cidade)">
-      <input type="text" id="destino" placeholder="Destino (preenchido pelo CEP ou manual)">
-      <button type="button" id="btnAbrirRota" class="btn-maps">🚗 Abrir rota no Google Maps</button>
-      <p class="helper">Dica: após abrir a rota, copie a distância do Maps e use no campo KM abaixo.</p>
-    </section>
-
-    <section>
-      <h2>💰 Cálculo de Frete</h2>
-      <div class="grid-2">
-        <input type="number" id="km" placeholder="Distância em KM" min="0" step="0.1">
-        <input type="number" id="peso" placeholder="Peso (kg)" min="0" step="0.1">
+      <div id="painelCep" class="panel active">
+        <input type="text" id="cep" maxlength="9" placeholder="CEP (obrigatório)">
+        <input type="text" id="numero" placeholder="Número (obrigatório)">
       </div>
-      <button type="button" id="btnCalcular">Calcular Frete</button>
+
+      <div id="painelEndereco" class="panel">
+        <input type="text" id="enderecoBusca" placeholder="Endereço completo do destino">
+      </div>
+
+      <button type="button" id="btnConsultarFrete">Consultar frete</button>
+      <p id="ruaResultado" class="info"></p>
       <p id="resultado"></p>
       <p id="aviso"></p>
     </section>
 
-    <section>
-      <h2>👤 Cliente e envio</h2>
-      <select id="cliente">
-        <option value="">Selecione o cliente</option>
-      </select>
-      <button type="button" id="btnEnviar">📲 Enviar WhatsApp</button>
-    </section>
-
-    <hr>
-
-    <section>
-      <h3>➕ Novo Cliente</h3>
+    <section id="secaoEntrega" class="hidden">
+      <h2>📦 Dados da entrega</h2>
       <input type="text" id="nomeCliente" placeholder="Nome do cliente">
-      <input type="text" id="numeroCliente" placeholder="DDD + número">
-      <button type="button" id="btnSalvarCliente" class="btn-secondary">Salvar Cliente</button>
-    </section>
+      <input type="datetime-local" id="horarioEntrega" placeholder="Horário da entrega">
+      <input type="text" id="pontoReferencia" placeholder="Ponto de referência">
 
-    <hr>
+      <select id="tipoEndereco">
+        <option value="casa">Casa</option>
+        <option value="apto">Apartamento</option>
+      </select>
 
-    <section>
-      <h3>📜 Histórico</h3>
-      <div id="historico"></div>
+      <div id="camposApto" class="grid-2 hidden">
+        <input type="text" id="bloco" placeholder="Bloco (obrigatório para apto)">
+        <input type="text" id="apto" placeholder="Apto (obrigatório para apto)">
+      </div>
+
+      <button type="button" id="btnEnviarLucas" class="btn-whatsapp">📲 Enviar WhatsApp para Lucas</button>
     </section>
   </main>
 

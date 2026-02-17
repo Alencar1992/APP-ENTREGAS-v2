@@ -14,15 +14,14 @@ body {
 
 .card {
   background: #0b1222;
-  width: min(100%, 420px);
+  width: min(100%, 460px);
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
 }
 
 h1,
-h2,
-h3 {
+h2 {
   text-align: center;
   margin: 0 0 10px;
 }
@@ -35,103 +34,93 @@ h2 {
 .subtitle {
   text-align: center;
   color: #94a3b8;
-  font-size: 0.9rem;
-  margin-top: 0;
-}
-
-.helper {
-  margin: 8px 0 0;
-  color: #94a3b8;
-  font-size: 0.85rem;
+  margin: 0 0 10px;
 }
 
 input,
 select,
 button {
   width: 100%;
-  padding: 12px;
   margin-top: 8px;
+  padding: 12px;
   border-radius: 8px;
   border: 1px solid #334155;
   background: #0f172a;
   color: #e5e7eb;
 }
 
-input[readonly] {
-  opacity: 0.85;
-}
-
 button {
-  background: #22c55e;
   border: none;
-  color: #052e16;
   font-weight: 700;
   cursor: pointer;
+  background: #22c55e;
+  color: #052e16;
 }
 
 button:hover {
   background: #16a34a;
 }
 
-.btn-secondary {
+.mode-switch {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.btn-toggle {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+.btn-toggle.active {
   background: #38bdf8;
   color: #082f49;
 }
 
-.btn-secondary:hover {
-  background: #0ea5e9;
+.panel {
+  display: none;
 }
 
-.btn-maps {
-  background: #f59e0b;
-  color: #451a03;
-}
-
-.btn-maps:hover {
-  background: #d97706;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-}
-
-.gap {
-  gap: 8px;
+.panel.active {
+  display: block;
 }
 
 .grid-2 {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-hr {
-  margin: 15px 0;
-  border: 1px solid #334155;
+.info {
+  margin: 10px 0 4px;
+  color: #93c5fd;
 }
 
 #resultado {
-  text-align: center;
-  font-size: 20px;
-  margin-top: 10px;
+  margin: 8px 0;
+  line-height: 1.5;
 }
 
 #aviso {
-  text-align: center;
   color: #facc15;
 }
 
-#historico {
-  max-height: 220px;
-  overflow-y: auto;
-  font-size: 14px;
+.btn-whatsapp {
+  background: #25d366;
+  color: #042f2e;
+}
+
+.btn-whatsapp:hover {
+  background: #1fae54;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 480px) {
-  .row,
+  .mode-switch,
   .grid-2 {
     grid-template-columns: 1fr;
-    flex-direction: column;
   }
 }
