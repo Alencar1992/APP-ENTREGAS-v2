@@ -7,35 +7,52 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="card">
+    <h1>🏍️ ALENCAR FRETES</h1>
+    <p class="subtitle">Origem fixa: Av. João Dias, 2074</p>
 
-<div class="card">
-  <h1>🏍️ ALENCAR FRETES</h1>
+    <section>
+      <h2>🔎 Pesquisa de destino</h2>
+      <div class="mode-switch" role="group" aria-label="Tipo de pesquisa">
+        <button type="button" id="btnModoCep" class="btn-toggle active">Pesquisar por CEP</button>
+        <button type="button" id="btnModoEndereco" class="btn-toggle">Pesquisar por Endereço</button>
+      </div>
 
-  <input type="number" id="km" placeholder="Distância em KM">
-  <button onclick="calcular()">Calcular Frete</button>
+      <div id="painelCep" class="panel active">
+        <input type="text" id="cep" maxlength="9" placeholder="CEP (obrigatório)">
+        <input type="text" id="numero" placeholder="Número (obrigatório)">
+      </div>
 
-  <p id="resultado"></p>
-  <p id="aviso"></p>
+      <div id="painelEndereco" class="panel">
+        <input type="text" id="enderecoBusca" placeholder="Endereço completo do destino">
+      </div>
 
-  <select id="cliente">
-    <option value="">Selecione a cliente</option>
-  </select>
+      <button type="button" id="btnConsultarFrete">Consultar frete</button>
+      <p id="ruaResultado" class="info"></p>
+      <p id="resultado"></p>
+      <p id="aviso"></p>
+    </section>
 
-  <button onclick="enviarWhatsApp()">📲 Enviar WhatsApp</button>
+    <section id="secaoEntrega" class="hidden">
+      <h2>📦 Dados da entrega</h2>
+      <input type="text" id="nomeCliente" placeholder="Nome do cliente">
+      <input type="datetime-local" id="horarioEntrega" placeholder="Horário da entrega">
+      <input type="text" id="pontoReferencia" placeholder="Ponto de referência">
 
-  <hr>
+      <select id="tipoEndereco">
+        <option value="casa">Casa</option>
+        <option value="apto">Apartamento</option>
+      </select>
 
-  <h3>➕ Novo Cliente</h3>
-  <input type="text" id="nomeCliente" placeholder="Nome da cliente">
-  <input type="text" id="numeroCliente" placeholder="DDD + número">
-  <button onclick="adicionarCliente()">Salvar Cliente</button>
+      <div id="camposApto" class="grid-2 hidden">
+        <input type="text" id="bloco" placeholder="Bloco (obrigatório para apto)">
+        <input type="text" id="apto" placeholder="Apto (obrigatório para apto)">
+      </div>
 
-  <hr>
+      <button type="button" id="btnEnviarLucas" class="btn-whatsapp">📲 Enviar WhatsApp para Lucas</button>
+    </section>
+  </main>
 
-  <h3>📜 Histórico</h3>
-  <div id="historico"></div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
